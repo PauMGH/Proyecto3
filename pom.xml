@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>es.ieslavereda</groupId>
-    <artifactId>examenPRGservidor2223</artifactId>
+    <artifactId>Proyecto3</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>examenPRGservidor2223</name>
     <description>examenPRGservidor2223</description>
