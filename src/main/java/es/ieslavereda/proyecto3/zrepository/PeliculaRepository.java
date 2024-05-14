@@ -1,9 +1,11 @@
 package es.ieslavereda.proyecto3.zrepository;
 
 
+import es.ieslavereda.proyecto3.model.Catalogo;
 import es.ieslavereda.proyecto3.model.Cliente;
 import es.ieslavereda.proyecto3.model.MyDataSource;
 import es.ieslavereda.proyecto3.model.Pelicula;
+import jdk.jfr.Timestamp;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -19,8 +21,20 @@ public class PeliculaRepository {
              Statement st = connection.createStatement();
              ResultSet rs = st.executeQuery(sql)){
             while (rs.next()) {
-                peliculas.add(Pelicula.builder().id(rs.getInt(1))
-                        .nombre(rs.getString(2))
+                peliculas.add(Pelicula.builder()
+                        .id(rs.getInt(1))
+                        .mediaValor(rs.getDouble(2))
+                        .titulo(rs.getString(3))
+                        .descripcion(rs.getString(4))
+                        .genero(rs.getString(5))
+                        .cod_alquiler(rs.getString(6))
+                        .director(rs.getString(7))
+                        .fechaEstreno(( java.util.Date)rs.getDate(8))
+                        .duracion(rs.getTime(9))
+                        .elenco(rs.getObject(10,String[].class))
+                        .tipo(rs.getObject(11, Catalogo.class))
+                        .caducidad(( java.util.Date)rs.getDate(12))
+                        .changedTS((Timestamp) rs.getTimestamp(13))
                         .build());
             }
         }
@@ -34,7 +48,21 @@ public class PeliculaRepository {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if(rs.next()){
-                p = Pelicula.builder().build();
+                p = Pelicula.builder()
+                        .id(rs.getInt(1))
+                        .mediaValor(rs.getDouble(2))
+                        .titulo(rs.getString(3))
+                        .descripcion(rs.getString(4))
+                        .genero(rs.getString(5))
+                        .cod_alquiler(rs.getString(6))
+                        .director(rs.getString(7))
+                        .fechaEstreno(( java.util.Date)rs.getDate(8))
+                        .duracion(rs.getTime(9))
+                        .elenco(rs.getObject(10,String[].class))
+                        .tipo(rs.getObject(11, Catalogo.class))
+                        .caducidad(( java.util.Date)rs.getDate(12))
+                        .changedTS((Timestamp) rs.getTimestamp(13))
+                        .build();
             }
         }
         return p;
@@ -52,21 +80,56 @@ public class PeliculaRepository {
     }
 
     public Pelicula updatePelicula(Pelicula pelicula) throws SQLException{
-        String sql = "UPDATE pelicula SET nombre = ? WHERE id = ?";
+        String sql = "UPDATE pelicula SET mediaValor = ?, " +
+                "titulo = ?, " +
+                "descripcion = ?, " +
+                "genero = ?, " +
+                "cod_alquiler = ?, " +
+                "director = ?, " +
+                "fechaEstreno = ?, " +
+                "duracion = ?, " +
+                "elenco = ?, " +
+                "tipo = ?, " +
+                "caducidad = ?, " +
+                "changedTS = ? " +
+                "WHERE id = ?";
         try(Connection connection = MyDataSource.getMyDataSource().getConnection();
             PreparedStatement cs = connection.prepareStatement(sql)) {
-            cs.setString(1,pelicula.getNombre());
-            cs.setInt(2,pelicula.getId());
+            cs.setDouble(1,pelicula.getMediaValor());
+            cs.setString(2,pelicula.getTitulo());
+            cs.setString(3, pelicula.getDescripcion());
+            cs.setString(4, pelicula.getGenero());
+            cs.setString(5, pelicula.getDirector());
+            cs.setDate(6, (Date) pelicula.getFechaEstreno());
+            cs.setTime(7, pelicula.getDuracion());
+            cs.setObject(8, pelicula.getElenco());
+            cs.setObject(9, pelicula.getTipo());
+            cs.setDate(10, (Date) pelicula.getCaducidad());
+            cs.setTimestamp(11, (java.sql.Timestamp) pelicula.getChangedTS());
+            cs.setInt(12, pelicula.getId());
             cs.executeUpdate();
         }
         return pelicula;
     }
 
     public Pelicula addPelicula(Pelicula pelicula) throws SQLException{
-        String sql = "INSERT INTO pelicula(nombre) VALUES (?)";
+        String sql = "INSERT INTO " +
+                "pelicula(mediaValor, titulo, descripcion, genero, cod_alquiler, director, fechaEstreno, duracion, elenco, tipo, caducidad, changedTS) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try(Connection connection = MyDataSource.getMyDataSource().getConnection();
             PreparedStatement cs = connection.prepareStatement(sql)) {
-            cs.setString(1,pelicula.getNombre());
+            cs.setDouble(1,pelicula.getMediaValor());
+            cs.setString(2, pelicula.getTitulo());
+            cs.setString(3, pelicula.getDescripcion());
+            cs.setString(4, pelicula.getGenero());
+            cs.setString(5, pelicula.getCod_alquiler());
+            cs.setString(6, pelicula.getDirector());
+            cs.setDate(7, (Date) pelicula.getFechaEstreno());
+            cs.setTime(8, pelicula.getDuracion());
+            cs.setObject(9, pelicula.getTipo());
+            cs.setDate(10, (Date) pelicula.getCaducidad());
+            cs.setTimestamp(11, (java.sql.Timestamp) pelicula.getChangedTS());
+            cs.setInt(12, pelicula.getId());
             cs.executeUpdate();
         }
         return pelicula;

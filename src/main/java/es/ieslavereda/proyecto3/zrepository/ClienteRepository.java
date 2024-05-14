@@ -3,6 +3,7 @@ package es.ieslavereda.proyecto3.zrepository;
 
 import es.ieslavereda.proyecto3.model.Cliente;
 import es.ieslavereda.proyecto3.model.MyDataSource;
+import jdk.jfr.Timestamp;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -19,8 +20,16 @@ public class ClienteRepository {
              ResultSet rs = st.executeQuery(sql)){
             while (rs.next()) {
                 clientes.add(Cliente.builder().id(rs.getInt(1))
-                        .nombre(rs.getString(2))
-                        .build());
+                .nombre(rs.getString(2))
+                .apellidos(rs.getString(3))
+                .contrasenya(rs.getString(4))
+                .domicilio(rs.getString(5))
+                .codigoPostal(rs.getInt(6))
+                .correo(rs.getString(7))
+                .fechaNacimiento(rs.getDate(8))
+                .tarjeta(rs.getInt(9))
+                .changedTS((Timestamp) rs.getTimestamp(10))
+                .build());
             }
         }
         return clientes;
@@ -33,7 +42,17 @@ public class ClienteRepository {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if(rs.next()){
-                c = Cliente.builder().build();
+                c = Cliente.builder().id(rs.getInt(1))
+                .nombre(rs.getString(2))
+                .apellidos(rs.getString(3))
+                .contrasenya(rs.getString(4))
+                .domicilio(rs.getString(5))
+                .codigoPostal(rs.getInt(6))
+                .correo(rs.getString(7))
+                .fechaNacimiento(rs.getDate(8))
+                .tarjeta(rs.getInt(9))
+                .changedTS((Timestamp) rs.getTimestamp(10))
+                .build();
             }
         }
         return c;
