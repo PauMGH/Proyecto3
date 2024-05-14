@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @RequestMapping("/api/v")
 public abstract class BaseController {
+
+    protected final Logger LOGGER = Logger.getLogger(getClass().getCanonicalName());
 
     protected ResponseEntity<?> getResponseError(SQLException e) {
 
