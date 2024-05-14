@@ -61,7 +61,7 @@ public class ClienteController extends BaseController{
         }
     }
 
-    @PutMapping("/cliente")
+    @PutMapping("/cliente/")
     public ResponseEntity<?> updateCliente(@RequestBody Cliente cliente) {
         LOGGER.log(Level.INFO, "Actualizando el cliente de id: " + cliente.getId());
 

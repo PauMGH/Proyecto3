@@ -1,7 +1,7 @@
 package es.ieslavereda.proyecto3.service;
 
 import es.ieslavereda.proyecto3.model.Person;
-import es.ieslavereda.proyecto3.repository.PersonRepository;
+import es.ieslavereda.proyecto3.zrepository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

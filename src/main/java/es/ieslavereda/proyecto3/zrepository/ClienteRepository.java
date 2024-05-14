@@ -1,4 +1,4 @@
-package es.ieslavereda.proyecto3.repository;
+package es.ieslavereda.proyecto3.zrepository;
 
 
 import es.ieslavereda.proyecto3.model.Cliente;
