@@ -20,4 +20,20 @@ public class ClienteService {
     public List<Cliente> getAllClientes() throws SQLException{
         return clienteRepository.getAll();
     }
+
+    public Object getClienteById(int id) throws SQLException{
+        return clienteRepository.getClienteById(id);
+    }
+
+    public Object deleteClienteById(int id) throws SQLException {
+        return clienteRepository.deleteClienteById(id);
+    }
+
+    public Object updateCliente(Cliente cliente) throws SQLException{
+        return clienteRepository.updateCliente(cliente);
+    }
+
+    public Object addCliente(Cliente cliente) throws SQLException{
+        return clienteRepository.addCliente(cliente);
+    }
 }
