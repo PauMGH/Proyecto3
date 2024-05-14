@@ -4,6 +4,7 @@ package es.ieslavereda.proyecto3.zrepository;
 import es.ieslavereda.proyecto3.model.Cliente;
 import es.ieslavereda.proyecto3.model.MyDataSource;
 import jdk.jfr.Timestamp;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -107,5 +108,10 @@ public class ClienteRepository {
             cs.executeUpdate();
         }
         return cliente;
+    }
+
+    public boolean identificar(String nombre, String pass, Boolean web) {
+
+        return false;
     }
 }

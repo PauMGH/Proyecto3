@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -80,6 +79,19 @@ public class ClienteController extends BaseController{
         LOGGER.log(Level.INFO, "Creando el cliente: " + cliente.getNombre());
         try {
             return new ResponseEntity<>(clienteService.addCliente(cliente) ,HttpStatus.OK);
+        }catch (SQLException e) {
+            Map<String,Object> response = new HashMap<>();
+            response.put("code",e.getErrorCode());
+            response.put("message",e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/identificar/")
+    public ResponseEntity<?> identificar(@RequestBody String nombre, String pass, Boolean web) throws SQLException{
+        LOGGER.log(Level.INFO, "Identificando");
+        try {
+            return new ResponseEntity<>(clienteService.indentificar(nombre, pass, web));
         }catch (SQLException e) {
             Map<String,Object> response = new HashMap<>();
             response.put("code",e.getErrorCode());

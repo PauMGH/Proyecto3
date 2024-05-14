@@ -3,6 +3,7 @@ package es.ieslavereda.proyecto3.service;
 import es.ieslavereda.proyecto3.model.Cliente;
 import es.ieslavereda.proyecto3.zrepository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -33,5 +34,9 @@ public class ClienteService {
 
     public Object addCliente(Cliente cliente) throws SQLException{
         return clienteRepository.addCliente(cliente);
+    }
+
+    public boolean indentificar(String nombre, String pass, Boolean web) throws SQLException{
+        return clienteRepository.identificar(nombre, pass, web);
     }
 }
