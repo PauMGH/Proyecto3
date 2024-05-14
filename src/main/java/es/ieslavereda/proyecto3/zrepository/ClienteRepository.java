@@ -70,21 +70,40 @@ public class ClienteRepository {
     }
 
     public Cliente updateCliente(Cliente cliente) throws SQLException{
-        String sql = "UPDATE cliente SET nombre = ? WHERE id = ?";
+        String sql = "UPDATE cliente SET nombre = ?, apellidos = ?, contrasenya = ?, domicilio = ?, codigoPostal = ?, correo = ?, fechaNacimiento = ?, tarjeta = ? WHERE id = ?";
         try(Connection connection = MyDataSource.getMyDataSource().getConnection();
             PreparedStatement cs = connection.prepareStatement(sql)) {
             cs.setString(1,cliente.getNombre());
-            cs.setInt(2,cliente.getId());
+            cs.setString(2, cliente.getApellidos());
+            cs.setString(3, cliente.getContrasenya());
+            cs.setString(4, cliente.getDomicilio());
+            cs.setInt(5, cliente.getCodigoPostal());
+            cs.setString(6, cliente.getCorreo());
+            cs.setDate(7, (Date) cliente.getFechaNacimiento());
+            cs.setInt(8, cliente.getTarjeta());
+            cs.setTimestamp(9, (java.sql.Timestamp) cliente.getChangedTS());
+            cs.setInt(10,cliente.getId());
+
             cs.executeUpdate();
         }
         return cliente;
     }
 
     public Object addCliente(Cliente cliente) throws SQLException{
-        String sql = "INSERT INTO cliente(nombre) VALUES (?)";
+        String sql = "INSERT INTO cliente(nombre, apellidos, contrasenya, domicilio, codigoPostal, correo, fechaNacimiento, tarjeta, changedTS) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try(Connection connection = MyDataSource.getMyDataSource().getConnection();
             PreparedStatement cs = connection.prepareStatement(sql)) {
             cs.setString(1,cliente.getNombre());
+            cs.setString(2, cliente.getApellidos());
+            cs.setString(3, cliente.getContrasenya());
+            cs.setString(4, cliente.getDomicilio());
+            cs.setInt(5, cliente.getCodigoPostal());
+            cs.setString(6, cliente.getCorreo());
+            cs.setDate(7, (Date) cliente.getFechaNacimiento());
+            cs.setInt(8, cliente.getTarjeta());
+            cs.setTimestamp(9, (java.sql.Timestamp) cliente.getChangedTS());
+
             cs.executeUpdate();
         }
         return cliente;
