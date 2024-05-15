@@ -91,7 +91,7 @@ public class ClienteController extends BaseController{
     public ResponseEntity<?> identificar(@RequestBody String nombre, String pass, Boolean web) throws SQLException{
         LOGGER.log(Level.INFO, "Identificando");
         try {
-            return new ResponseEntity<>(clienteService.indentificar(nombre, pass, web));
+            return new ResponseEntity<>(clienteService.indentificar(nombre, pass, web), HttpStatus.OK);
         }catch (SQLException e) {
             Map<String,Object> response = new HashMap<>();
             response.put("code",e.getErrorCode());

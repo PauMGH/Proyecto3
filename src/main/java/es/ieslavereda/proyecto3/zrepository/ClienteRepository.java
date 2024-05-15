@@ -13,6 +13,9 @@ import java.util.List;
 
 @Repository
 public class ClienteRepository {
+
+    private String admin = "";
+
     public List<Cliente> getAll() throws SQLException {
         List<Cliente> clientes = new ArrayList<Cliente>();
         String sql = "SELECT * FROM cliente";
@@ -90,7 +93,7 @@ public class ClienteRepository {
         return cliente;
     }
 
-    public Object addCliente(Cliente cliente) throws SQLException{
+    public Cliente addCliente(Cliente cliente) throws SQLException{
         String sql = "INSERT INTO cliente(nombre, apellidos, contrasenya, domicilio, codigoPostal, correo, fechaNacimiento, tarjeta, changedTS) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try(Connection connection = MyDataSource.getMyDataSource().getConnection();
@@ -110,8 +113,22 @@ public class ClienteRepository {
         return cliente;
     }
 
-    public boolean identificar(String nombre, String pass, Boolean web) {
-
-        return false;
+    public boolean identificar(String nombre, String pass, Boolean web) throws  SQLException{
+        String sql = "SELECT id FROM cliente WHERE nombre = '?' AND pass = '?'";
+        boolean res;
+        try(Connection connection = MyDataSource.getMyDataSource().getConnection();
+            PreparedStatement cs = connection.prepareStatement(sql)) {
+            cs.setString(1, nombre);
+            cs.setString(2, pass);
+            ResultSet rs = cs.executeQuery(sql);
+            if(rs.next()){
+                if (web){
+                    res = rs.getString(0).equals(admin);
+                }else{
+                    res = !rs.getString(0).equals(admin);
+                }
+            }else res = false;
+        }
+        return res;
     }
 }
