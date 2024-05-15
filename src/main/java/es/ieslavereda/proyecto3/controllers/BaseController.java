@@ -1,4 +1,4 @@
-package es.ieslavereda.proyecto3.controller;
+package es.ieslavereda.proyecto3.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,14 +1,12 @@
-package es.ieslavereda.proyecto3.service;
+package es.ieslavereda.proyecto3.services;
 
 import es.ieslavereda.proyecto3.model.Cliente;
-import es.ieslavereda.proyecto3.zrepository.ClienteRepository;
+import es.ieslavereda.proyecto3.zrepositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 public class ClienteService {

@@ -1,8 +1,8 @@
-package es.ieslavereda.proyecto3.service;
+package es.ieslavereda.proyecto3.services;
 
 
 import es.ieslavereda.proyecto3.model.Pelicula;
-import es.ieslavereda.proyecto3.zrepository.PeliculaRepository;
+import es.ieslavereda.proyecto3.zrepositories.PeliculaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

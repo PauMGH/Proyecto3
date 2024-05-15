@@ -1,10 +1,9 @@
-package es.ieslavereda.proyecto3.zrepository;
+package es.ieslavereda.proyecto3.zrepositories;
 
 
 import es.ieslavereda.proyecto3.model.Cliente;
 import es.ieslavereda.proyecto3.model.MyDataSource;
 import jdk.jfr.Timestamp;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -123,9 +122,9 @@ public class ClienteRepository {
             ResultSet rs = cs.executeQuery(sql);
             if(rs.next()){
                 if (web){
-                    res = rs.getString(0).equals(admin);
+                    res = rs.getString(1).equals(admin);
                 }else{
-                    res = !rs.getString(0).equals(admin);
+                    res = !rs.getString(1).equals(admin);
                 }
             }else res = false;
         }

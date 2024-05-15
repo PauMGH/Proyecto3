@@ -1,7 +1,7 @@
-package es.ieslavereda.proyecto3.controller;
+package es.ieslavereda.proyecto3.controllers;
 
 import es.ieslavereda.proyecto3.model.Cliente;
-import es.ieslavereda.proyecto3.service.ClienteService;
+import es.ieslavereda.proyecto3.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

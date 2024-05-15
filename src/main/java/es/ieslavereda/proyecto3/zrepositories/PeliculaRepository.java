@@ -1,8 +1,7 @@
-package es.ieslavereda.proyecto3.zrepository;
+package es.ieslavereda.proyecto3.zrepositories;
 
 
 import es.ieslavereda.proyecto3.model.Catalogo;
-import es.ieslavereda.proyecto3.model.Cliente;
 import es.ieslavereda.proyecto3.model.MyDataSource;
 import es.ieslavereda.proyecto3.model.Pelicula;
 import jdk.jfr.Timestamp;
