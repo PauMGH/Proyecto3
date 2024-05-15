@@ -21,5 +21,5 @@ public class Cliente {
     private String correo;
     private Date fechaNacimiento;// se recibe como date de tipo sql, hay que cambiar el tipo para recibirla
     private int tarjeta;
-    private Timestamp changedTS;
+    //private Timestamp changedTS;
 }

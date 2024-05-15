@@ -1,14 +1,21 @@
 package es.ieslavereda.proyecto3.model;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
-import javax.sql.DataSource;
+import oracle.jdbc.datasource.impl.OracleDataSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+import javax.sql.DataSource;
+import java.sql.SQLException;
+
+@Configuration
 public class MyDataSource {
-    public static DataSource getMyDataSource() {
-        MysqlDataSource mySQL = new MysqlDataSource();
-        mySQL.setURL("jdbc:mysql://localhost:3306/bbddJava");
-        mySQL.setUser("root");
-        mySQL.setPassword("1234");
+    @Bean
+    public static DataSource getMyDataSource() throws SQLException {
+        OracleDataSource mySQL = new OracleDataSource();
+        mySQL.setURL("jdbc:oracle:thin:@172.28.201.239:1521:xe");
+        mySQL.setUser("C##1DAMESPINOSA");
+        mySQL.setPassword("password");
         return mySQL;
+
     }
 }

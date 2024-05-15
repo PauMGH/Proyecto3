@@ -20,9 +20,9 @@ public class Pelicula {
             cod_alquiler,
             director;
     private Date fechaEstreno;
-    private Time duracion;
-    private String[] elenco;
-    private Catalogo tipo;
+    private String  duracion;
+    private String elenco;
+    private String tipo; //Catalogo
     private Date caducidad;
-    private Timestamp changedTS;
+    //private Timestamp changedTS;
 }

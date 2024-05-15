@@ -17,21 +17,21 @@ public class ClienteRepository {
 
     public List<Cliente> getAll() throws SQLException {
         List<Cliente> clientes = new ArrayList<Cliente>();
-        String sql = "SELECT * FROM cliente";
+        String sql = "SELECT * FROM Cliente";
         try (Connection connection = MyDataSource.getMyDataSource().getConnection();
+
              Statement st = connection.createStatement();
              ResultSet rs = st.executeQuery(sql)){
             while (rs.next()) {
                 clientes.add(Cliente.builder().id(rs.getInt(1))
-                .nombre(rs.getString(2))
-                .apellidos(rs.getString(3))
-                .contrasenya(rs.getString(4))
+                .nombre(rs.getString(3))
+                .apellidos(rs.getString(4))
+                .contrasenya(rs.getString(2))
                 .domicilio(rs.getString(5))
                 .codigoPostal(rs.getInt(6))
                 .correo(rs.getString(7))
                 .fechaNacimiento(rs.getDate(8))
                 .tarjeta(rs.getInt(9))
-                .changedTS((Timestamp) rs.getTimestamp(10))
                 .build());
             }
         }
@@ -39,22 +39,22 @@ public class ClienteRepository {
     }
 
     public Cliente getClienteById(int id)  throws SQLException{
-        String sql = "SELECT * FROM cliente WHERE id = " + id;
+        String sql = "SELECT * FROM Cliente WHERE Id_cliente = " + id;
         Cliente c = null;
         try (Connection connection = MyDataSource.getMyDataSource().getConnection();){
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if(rs.next()){
                 c = Cliente.builder().id(rs.getInt(1))
-                .nombre(rs.getString(2))
-                .apellidos(rs.getString(3))
-                .contrasenya(rs.getString(4))
+                .nombre(rs.getString(3))
+                .apellidos(rs.getString(4))
+                .contrasenya(rs.getString(2))
                 .domicilio(rs.getString(5))
                 .codigoPostal(rs.getInt(6))
                 .correo(rs.getString(7))
                 .fechaNacimiento(rs.getDate(8))
                 .tarjeta(rs.getInt(9))
-                .changedTS((Timestamp) rs.getTimestamp(10))
+                //.changedTS((Timestamp) rs.getTimestamp(10))
                 .build();
             }
         }
@@ -84,7 +84,7 @@ public class ClienteRepository {
             cs.setString(6, cliente.getCorreo());
             cs.setDate(7, (Date) cliente.getFechaNacimiento());
             cs.setInt(8, cliente.getTarjeta());
-            cs.setTimestamp(9, (java.sql.Timestamp) cliente.getChangedTS());
+            //cs.setTimestamp(9, (java.sql.Timestamp) cliente.getChangedTS());
             cs.setInt(10,cliente.getId());
 
             cs.executeUpdate();
@@ -105,7 +105,7 @@ public class ClienteRepository {
             cs.setString(6, cliente.getCorreo());
             cs.setDate(7, (Date) cliente.getFechaNacimiento());
             cs.setInt(8, cliente.getTarjeta());
-            cs.setTimestamp(9, (java.sql.Timestamp) cliente.getChangedTS());
+            //cs.setTimestamp(9, (java.sql.Timestamp) cliente.getChangedTS());
 
             cs.executeUpdate();
         }
