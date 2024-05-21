@@ -5,17 +5,34 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Properties;
 
 @Configuration
 public class MyDataSource {
     @Bean
-    public static DataSource getMyDataSource() throws SQLException {
-        OracleDataSource mySQL = new OracleDataSource();
-        mySQL.setURL("jdbc:oracle:thin:@172.28.201.239:1521:xe");
-        mySQL.setUser("C##1DAMESPINOSA");
-        mySQL.setPassword("password");
-        return mySQL;
-
+    public static DataSource getMyDataSource(){
+        // Propiedades donde tenemos los datos de acceso a la BD
+        Properties props = new Properties();
+        // Objeto DataSource que devolveremos
+        OracleDataSource oracleDS = null;
+        try (FileInputStream fis = new FileInputStream("db.properties");) {
+            // Cargamos las propiedades
+            props.load(fis);
+            // Generamos el DataSource con los datos URL, user y passwd necesarios
+            oracleDS = new OracleDataSource();
+            oracleDS.setURL(props.getProperty("ORACLE_DB_URL"));
+            oracleDS.setUser(props.getProperty("ORACLE_DB_USERNAME"));
+            oracleDS.setPassword(props.getProperty("ORACLE_DB_PASSWORD"));
+            System.out.println("Connection established successfully.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
+        return oracleDS;
     }
 }

@@ -39,11 +39,12 @@ public class ClienteRepository {
     }
 
     public Cliente getClienteById(int id)  throws SQLException{
-        String sql = "SELECT * FROM Cliente WHERE Id_cliente = " + id;
+        String sql = "SELECT * FROM Cliente WHERE Id_cli = ?";
         Cliente c = null;
-        try (Connection connection = MyDataSource.getMyDataSource().getConnection();){
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+        try (Connection connection = MyDataSource.getMyDataSource().getConnection()){
+             PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1,id);
+             ResultSet rs = st.executeQuery();
             if(rs.next()){
                 c = Cliente.builder().id(rs.getInt(1))
                 .nombre(rs.getString(3))
