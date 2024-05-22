@@ -34,4 +34,8 @@ public class PeliculaService {
     public Pelicula addPelicula(Pelicula pelicula) throws SQLException{
         return peliculaRepository.addPelicula(pelicula);
     }
+
+    public List<Pelicula> callMostrarPeliculas() throws SQLException{
+      return peliculaRepository.callMostrarPeliculas();
+    }
 }

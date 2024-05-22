@@ -1,5 +1,6 @@
 package es.ieslavereda.proyecto3.controllers;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import es.ieslavereda.proyecto3.model.Cliente;
 import es.ieslavereda.proyecto3.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+import es.ieslavereda.proyecto3.model.Pelicula;
+import es.ieslavereda.proyecto3.services.PeliculaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+
+
+
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 
 @RestController

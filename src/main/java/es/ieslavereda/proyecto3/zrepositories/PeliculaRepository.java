@@ -5,6 +5,7 @@ import es.ieslavereda.proyecto3.model.Catalogo;
 import es.ieslavereda.proyecto3.model.MyDataSource;
 import es.ieslavereda.proyecto3.model.Pelicula;
 import jdk.jfr.Timestamp;
+import oracle.jdbc.internal.OracleTypes;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -68,6 +69,9 @@ public class PeliculaRepository {
         }
         return p;
     }
+
+
+
 
     public Pelicula deletePeliculaById(int id) throws SQLException{
         String sql = "DELETE FROM pelicula WHERE id = " + id;
@@ -135,4 +139,42 @@ public class PeliculaRepository {
         }
         return pelicula;
     }
+
+
+
+    public List<Pelicula> callMostrarPeliculas() throws SQLException {
+        List<Pelicula> peliculas = new ArrayList<>();
+        Pelicula p= null;
+        try (Connection connection = MyDataSource.getMyDataSource().getConnection()) {
+            CallableStatement callableStatement = connection.prepareCall("{? = call MostrarPeliculas}");
+            callableStatement.registerOutParameter(1, OracleTypes.CURSOR);
+            callableStatement.execute();
+            ResultSet rs = (ResultSet) callableStatement.getObject(1);
+            while (rs.next()) {
+                p = Pelicula.builder()
+                        .id(rs.getInt(1))
+                        .mediaValor(rs.getDouble(2))
+                        .titulo(rs.getString(3))
+                        .descripcion(rs.getString(4))
+                        .genero(rs.getString(5))
+                        .cod_alquiler(rs.getString(6))
+                        .director(rs.getString(7))
+                        .fechaEstreno(( java.util.Date)rs.getDate(8))
+                        .duracion(rs.getString(9))
+                        .elenco(rs.getString(10))
+                        .tipo(rs.getString(11))
+                        .caducidad(( java.util.Date)rs.getDate(12))
+                        //.changedTS((Timestamp) rs.getTimestamp(13))
+                        .build();
+                peliculas.add(p); // Add the Pelicula object to the list
+            }
+        }
+        return peliculas;
+    }
+
+
+
+
+
+
 }

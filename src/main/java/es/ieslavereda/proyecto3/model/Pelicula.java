@@ -24,5 +24,5 @@ public class Pelicula {
     private String elenco;
     private String tipo; //Catalogo
     private Date caducidad;
-    //private Timestamp changedTS;
+    private Timestamp changedTS;
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -83,4 +84,20 @@ public class PeliculaController extends BaseController{
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/mostrarPeliculas")
+    public ResponseEntity<?> callMostrarPeliculas(){
+        LOGGER.log(Level.INFO,"Calling MostrarPeliculas procedure");
+        try{
+            List<Pelicula> peliculas = peliculaService.callMostrarPeliculas();
+            return new ResponseEntity<>(peliculas, HttpStatus.OK);
+        } catch (SQLException e) {
+            Map<String,Object> response = new HashMap<>();
+            response.put("code",e.getErrorCode());
+            response.put("message",e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

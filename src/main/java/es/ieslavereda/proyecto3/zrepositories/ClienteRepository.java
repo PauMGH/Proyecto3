@@ -113,22 +113,24 @@ public class ClienteRepository {
         return cliente;
     }
 
-    public boolean identificar(String nombre, String pass, Boolean web) throws  SQLException{
-        String sql = "SELECT id FROM cliente WHERE nombre = '?' AND pass = '?'";
-        boolean res;
-        try(Connection connection = MyDataSource.getMyDataSource().getConnection();
-            PreparedStatement cs = connection.prepareStatement(sql)) {
+    public boolean identificar(String nombre, String pass, Boolean web) throws SQLException {
+        String sql = "SELECT id FROM Cliente WHERE nombre = ? AND pass = ?";
+        boolean res = false;
+        try (Connection connection = MyDataSource.getMyDataSource().getConnection();
+             PreparedStatement cs = connection.prepareStatement(sql)) {
             cs.setString(1, nombre);
             cs.setString(2, pass);
-            ResultSet rs = cs.executeQuery(sql);
-            if(rs.next()){
-                if (web){
-                    res = rs.getString(1).equals(admin);
-                }else{
-                    res = !rs.getString(1).equals(admin);
+            try (ResultSet rs = cs.executeQuery()) {
+                if (rs.next()) {
+                    if (web) {
+                        res = rs.getString(3).equals(admin);
+                    } else {
+                        res = !rs.getString(3).equals(admin);
+                    }
                 }
-            }else res = false;
+            }
         }
         return res;
     }
+
 }
