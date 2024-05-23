@@ -26,7 +26,7 @@ public class ClienteService {
         return clienteRepository.deleteClienteById(id);
     }
 
-    public Cliente updateCliente(Cliente cliente) throws SQLException{
+    public int updateCliente(Cliente cliente) throws SQLException{
         return clienteRepository.updateCliente(cliente);
     }
 

@@ -7,13 +7,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Carrito {
-    private Long idCar;
-    private Contenido contenido;
-    private String titulo;
-    private Double importe;
-    private Date changedTS;
+public class Valoracion {
     private Cliente cliente;
+    private Contenido contenido;
+    private Double valoracion;
+    private Date changedTS;
 
     // Getters and Setters
 }

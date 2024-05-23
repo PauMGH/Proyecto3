@@ -1,25 +1,23 @@
 package es.ieslavereda.proyecto3.model;
 
-import jdk.jfr.Timestamp;
 import lombok.*;
-
-import java.util.Date;
-
+import java.sql.Date;
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class Cliente {
-    private int id;
+    private int idCli;
+    private String usuario;
+    private String contrasenya;
     private String nombre;
     private String apellidos;
-    private String contrasenya;
     private String domicilio;
-    private int codigoPostal;
-    private String correo;
-    private Date fechaNacimiento;// se recibe como date de tipo sql, hay que cambiar el tipo para recibirla
+    private Integer codigoPostal;
+    private String email;
+    private Date fechaNacimiento;
     private int tarjeta;
-    //private Timestamp changedTS;
+    private boolean administrador;
+    private Date changedTS;
 }

@@ -1,8 +1,7 @@
 package es.ieslavereda.proyecto3.model;
 
-import java.util.Date;
+import java.sql.Date;
 import lombok.*;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -10,14 +9,11 @@ import lombok.*;
 @Builder
 public class Factura {
     private static final int IVA = 21;
-    private Float importeBase;
-    private int id,
-            id_cliente;
-    private Date fecha;
-}
+    private Long idFac;
+    private Cliente cliente;
+    private Date fechaFac;
+    private Double baseImponible;
+    private Date changedTS;
 
-/*
- private static final int IVA = 21;
-    private int importeBase,id,id_cliente;
-    private Date fecha;
- */
+    // Getters and Setters
+}

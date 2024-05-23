@@ -1,22 +1,11 @@
 package es.ieslavereda.proyecto3.controllers;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import es.ieslavereda.proyecto3.model.Cliente;
 import es.ieslavereda.proyecto3.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
-import es.ieslavereda.proyecto3.model.Pelicula;
-import es.ieslavereda.proyecto3.services.PeliculaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-
 
 
 import java.sql.SQLException;
@@ -29,7 +18,7 @@ public class ClienteController extends BaseController{
 
     @Autowired
     ClienteService clienteService;
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/clientes")
     public ResponseEntity<?> getClientes() {
         LOGGER.log(Level.INFO,"Obteniendo todos los Clientes");
@@ -74,7 +63,7 @@ public class ClienteController extends BaseController{
 
     @PutMapping("/cliente/")
     public ResponseEntity<?> updateCliente(@RequestBody Cliente cliente) {
-        LOGGER.log(Level.INFO, "Actualizando el cliente de id: " + cliente.getId());
+        LOGGER.log(Level.INFO, "Actualizando el cliente de id: " + cliente.getIdCli());
 
         try {
             return new ResponseEntity<>(clienteService.updateCliente(cliente) ,HttpStatus.OK);
