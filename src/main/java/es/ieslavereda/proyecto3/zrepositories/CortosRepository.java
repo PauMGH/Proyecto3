@@ -31,7 +31,7 @@ public class CortosRepository {
                         .tarifa(rs.getDouble("Precio"))
                         .descripcion(rs.getString(9))
                         .director(rs.getString(10))
-                        .duracion(rs.getTime(11))
+                        //.duracion(rs.getTime(11))
                         .elenco(rs.getString(12))
                         .fechaEstreno(rs.getDate(13))
                         .valoracionMedia(rs.getDouble(14))

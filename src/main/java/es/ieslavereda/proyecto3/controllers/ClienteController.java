@@ -33,7 +33,7 @@ public class ClienteController extends BaseController{
         }
 
     }
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/cliente/{id}")
     public ResponseEntity<?> getClienteById(@PathVariable("id") int id) {
         LOGGER.log(Level.INFO, "Obteniendo el cliente de id: " + id);
@@ -47,7 +47,7 @@ public class ClienteController extends BaseController{
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/cliente/{id}")
     public ResponseEntity<?> deleteClienteById(@PathVariable("id") int id) {
         LOGGER.log(Level.INFO, "Borrando el cliente de id: " + id);
@@ -60,7 +60,7 @@ public class ClienteController extends BaseController{
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @CrossOrigin(origins = "*")
     @PutMapping("/cliente/")
     public ResponseEntity<?> updateCliente(@RequestBody Cliente cliente) {
         LOGGER.log(Level.INFO, "Actualizando el cliente de id: " + cliente.getIdCli());
@@ -74,7 +74,7 @@ public class ClienteController extends BaseController{
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @CrossOrigin(origins = "*")
     @PostMapping("/cliente/")
     public ResponseEntity<?> addCliente(@RequestBody Cliente cliente) {
         LOGGER.log(Level.INFO, "Creando el cliente: " + cliente.getNombre());
