@@ -9,7 +9,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Builder
 public class Tarifa {
-    private long idTarifa;
+    private int idTarifa;
     private double precio;
     private Date changedTS;
 }

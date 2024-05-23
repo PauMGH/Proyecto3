@@ -13,10 +13,10 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 public class Contenido {
-    private Long idCont;
-    private Contenido tipo;
+    private Integer idCont;
+    private String tipo;
     private String genero;
-    private Tarifa tarifa;
+    private Double tarifa;
     private String descripcion;
     private String director;
     private Time duracion;
