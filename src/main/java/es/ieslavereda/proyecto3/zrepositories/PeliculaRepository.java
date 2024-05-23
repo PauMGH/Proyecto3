@@ -87,4 +87,28 @@ public class PeliculaRepository {
         }
         return p;
     }
+
+    public Pelicula addPelicula (Pelicula pelicula) throws SQLException {
+        String sql = "call GenerarContenido(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try (Connection connection = MyDataSource.getMyDataSource().getConnection();
+             CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setString(1, pelicula.getTipo());
+            cs.setString(2, pelicula.getGenero());
+            cs.setDouble(3,pelicula.getTarifa());
+            cs.setString(4, pelicula.getDescripcion());
+            cs.setString(5, pelicula.getDirector());
+            cs.setTime(6, pelicula.getDuracion());
+            cs.setString(7, pelicula.getElenco());
+            cs.setDate(8, pelicula.getFechaEstreno());
+            cs.setDouble(9, pelicula.getValoracionMedia());
+            cs.setString(10, pelicula.getTitulo());
+            cs.setString(11, pelicula.getIdioma());
+            cs.setString(12, pelicula.getImagen());
+            cs.setDate(13,pelicula.getCaducidad());
+
+            cs.executeQuery();
+
+        }
+        return pelicula;
+    }
 }

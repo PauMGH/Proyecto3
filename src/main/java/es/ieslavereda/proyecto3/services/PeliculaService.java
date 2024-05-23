@@ -26,4 +26,8 @@ public class PeliculaService {
         return peliculaRepository.deletePeliculaById(id);
     }
 
+    public Pelicula addPelicula (Pelicula pelicula) throws SQLException{
+        return peliculaRepository.addPelicula(pelicula);
+    }
+
 }

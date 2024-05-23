@@ -60,5 +60,18 @@ public class PeliculasController extends BaseController{
         }
     }
 
+    @PostMapping("/pelicula/")
+    public ResponseEntity<?> addPelicula (@RequestBody Pelicula pelicula){
+        LOGGER.log(Level.INFO, "Creando el cliente: " + pelicula.getTitulo());
+        try {
+            return new ResponseEntity<>(peliculaService.addPelicula(pelicula) ,HttpStatus.OK);
+        }catch (SQLException e) {
+            Map<String,Object> response = new HashMap<>();
+            response.put("code",e.getErrorCode());
+            response.put("message",e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }
