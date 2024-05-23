@@ -27,7 +27,6 @@ public class MyDataSource {
             oracleDS.setURL(props.getProperty("ORACLE_DB_URL"));
             oracleDS.setUser(props.getProperty("ORACLE_DB_USERNAME"));
             oracleDS.setPassword(props.getProperty("ORACLE_DB_PASSWORD"));
-            System.out.println("Connection established successfully.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }catch (IOException e){

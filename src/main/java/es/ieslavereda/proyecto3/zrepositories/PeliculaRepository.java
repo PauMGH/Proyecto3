@@ -16,7 +16,7 @@ public class PeliculaRepository {
 
     private String admin = "";
 
-    public List<Pelicula> getAll() throws SQLException {
+    public static List<Pelicula> getAll() throws SQLException {
         List<Pelicula> peliculas = new ArrayList<>();
         String sql = "select * FROM Pelicula p JOIN Contenido c ON p.Id_cont = c.Id_cont JOIN tarifa t on c.id_tarifa = t.id_tarifa";
         try (Connection connection = MyDataSource.getMyDataSource().getConnection();
@@ -46,7 +46,7 @@ public class PeliculaRepository {
         return peliculas;
     }
 
-    public Pelicula getPeliculaById(int id) throws SQLException {
+    public static Pelicula getPeliculaById(int id) throws SQLException {
         String sql = "select * FROM Pelicula p JOIN Contenido c ON p.Id_cont = c.Id_cont JOIN tarifa t on c.id_tarifa = t.id_tarifa WHERE p.Id_cont=?";
         Pelicula p = null;
         try (Connection connection = MyDataSource.getMyDataSource().getConnection()) {
