@@ -14,6 +14,37 @@ public class ClienteRepository {
 
     private String admin = "";
 
+    public List<Cliente> getAll() {
+        List<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM Cliente";
+        try (Connection connection = MyDataSource.getMyDataSource().getConnection();
+             Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                clientes.add(Cliente.builder()
+                        .idCli(rs.getInt("ID_CLI"))
+                        .usuario(rs.getString("USUARIO"))
+                        .contrasenya(rs.getString("CONTRASENYA"))
+                        .nombre(rs.getString("NOMBRE"))
+                        .apellidos(rs.getString("APELLIDOS"))
+                        .domicilio(rs.getString("DOMICILIO"))
+                        .codigoPostal(rs.getInt("CODIGOPOSTAL"))
+                        .email(rs.getString("EMAIL"))
+                        .fechaNacimiento(rs.getDate("FECHANACIMIENTO"))
+                        .tarjeta(rs.getInt("TARJETA"))
+                        .administrador(rs.getString("ADMINISTRADOR").equals("T"))
+                        .changedTS(rs.getDate("CHANGEDTS"))
+                        .build());
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving data from the Cliente table: " + e.getMessage());
+        }
+        return clientes;
+    }
+
+
+
+/*
     public List<Cliente> getAll() throws SQLException {
         List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM Cliente";
@@ -39,7 +70,7 @@ public class ClienteRepository {
         }
         return clientes;
     }
-
+    */
 
     public Cliente getClienteById(int id)  throws SQLException{
         String sql = "SELECT * FROM Cliente WHERE Id_cli = ?";
