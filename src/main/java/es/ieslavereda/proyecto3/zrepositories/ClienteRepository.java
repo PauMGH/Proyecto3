@@ -163,22 +163,22 @@ public class ClienteRepository {
     }
 
     public boolean identificar(String nombre, String pass, Boolean web) throws SQLException {
-        String sql = "SELECT id FROM Cliente WHERE nombre = ? AND pass = ?";
+        String sql = "? = verificar_usuario_contrasena(?,?)";
         boolean res = false;
         try (Connection connection = MyDataSource.getMyDataSource().getConnection();
-             PreparedStatement cs = connection.prepareStatement(sql)) {
-            cs.setString(1, nombre);
-            cs.setString(2, pass);
-            try (ResultSet rs = cs.executeQuery()) {
-                if (rs.next()) {
-                    if (web) {
-                        res = rs.getString(3).equals(admin);
-                    } else {
-                        res = !rs.getString(3).equals(admin);
-                    }
-                }
-            }
-        }
+         CallableStatement cs = connection.prepareCall(sql)) {
+        
+        // Registrar el primer parámetro como un tipo de resultado (por ejemplo, un entero)
+        cs.registerOutParameter(1, java.sql.Types.INTEGER);
+        cs.setString(2, nombre);
+        cs.setString(3, pass);
+        
+        // Ejecutar la consulta
+        cs.executeQuery();
+        // Obtener el resultado del primer parámetro
+        int result = cs.getBo(1);
+        res = cs.getBoolean(1);
+    }
         return res;
     }
 
